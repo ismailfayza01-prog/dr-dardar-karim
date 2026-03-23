@@ -16,41 +16,46 @@ export function ScrollTransition() {
     const overlay = overlayRef.current;
     if (!container || !chairImg || !doctorImg || !overlay) return;
 
+    const c = container as HTMLDivElement;
+    const ci = chairImg as HTMLDivElement;
+    const di = doctorImg as HTMLDivElement;
+    const ov = overlay as HTMLDivElement;
+
     function onScroll() {
-      const rect = container.getBoundingClientRect();
-      const totalHeight = container.offsetHeight - window.innerHeight;
+      const rect = c.getBoundingClientRect();
+      const totalHeight = c.offsetHeight - window.innerHeight;
       const scrolled = -rect.top;
       const progress = Math.max(0, Math.min(1, scrolled / totalHeight));
 
       if (progress <= 0.35) {
         const p = progress / 0.35;
         const scale = 1 + p * 2;
-        chairImg.style.transform = "scale(" + scale + ")";
-        chairImg.style.borderRadius = (32 - p * 32) + "px";
-        chairImg.style.filter = "brightness(" + (1 + p * 0.2) + ")";
-        doctorImg.style.opacity = "0";
-        doctorImg.style.transform = "scale(1) translateX(0%)";
-        overlay.style.opacity = "0";
+        ci.style.transform = "scale(" + scale + ")";
+        ci.style.borderRadius = (32 - p * 32) + "px";
+        ci.style.filter = "brightness(" + (1 + p * 0.2) + ")";
+        di.style.opacity = "0";
+        di.style.transform = "scale(1) translateX(0%)";
+        ov.style.opacity = "0";
       } else if (progress <= 0.65) {
         const p = (progress - 0.35) / 0.30;
         const rotation = p * 360;
-        chairImg.style.transform = "scale(3) rotateY(" + rotation + "deg)";
-        chairImg.style.borderRadius = "0px";
-        chairImg.style.filter = "brightness(" + (1.2 - p * 0.2) + ")";
-        doctorImg.style.opacity = p > 0.5 ? String((p - 0.5) / 0.5) : "0";
-        doctorImg.style.transform = "scale(1) translateX(0%)";
-        overlay.style.opacity = "0";
+        ci.style.transform = "scale(3) rotateY(" + rotation + "deg)";
+        ci.style.borderRadius = "0px";
+        ci.style.filter = "brightness(" + (1.2 - p * 0.2) + ")";
+        di.style.opacity = p > 0.5 ? String((p - 0.5) / 0.5) : "0";
+        di.style.transform = "scale(1) translateX(0%)";
+        ov.style.opacity = "0";
       } else {
         const p = (progress - 0.65) / 0.35;
-        chairImg.style.transform = "scale(" + (3 - p * 2.4) + ")";
-        chairImg.style.borderRadius = (p * 32) + "px";
-        chairImg.style.filter = "brightness(1) opacity(" + (1 - p) + ")";
-        doctorImg.style.opacity = "1";
+        ci.style.transform = "scale(" + (3 - p * 2.4) + ")";
+        ci.style.borderRadius = (p * 32) + "px";
+        ci.style.filter = "brightness(1) opacity(" + (1 - p) + ")";
+        di.style.opacity = "1";
         const scale = 1 - p * 0.5;
         const translateX = p * 50;
-        doctorImg.style.transform = "scale(" + scale + ") translateX(" + translateX + "%)";
-        doctorImg.style.transformOrigin = "right center";
-        overlay.style.opacity = String(Math.min(p * 2, 1));
+        di.style.transform = "scale(" + scale + ") translateX(" + translateX + "%)";
+        di.style.transformOrigin = "right center";
+        ov.style.opacity = String(Math.min(p * 2, 1));
       }
     }
 
@@ -101,4 +106,4 @@ export function ScrollTransition() {
       </div>
     </div>
   );
-                            }
+    }
