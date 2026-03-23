@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import clsx from "clsx";
+import { ScrollTransition } from "@/components/public/scroll-transition";
 import {
   ArrowRight,
   Award,
@@ -261,6 +262,7 @@ export function PublicHome({ locale }: { locale: HomeLocale }) {
             </div>
           </div>
         </section>
+        <ScrollTransition />
 
         <section className="border-y border-[hsl(var(--smile-border)/0.6)] bg-white/60 py-8">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 px-4 sm:px-6 md:gap-14">
